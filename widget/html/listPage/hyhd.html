@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/svg.css"/>
+    <script type="text/javascript" src="../../script/main.js"></script>
+    <style>
+			.list_ls{background-color: #f8f8f8;}
+      .list_ls ._left{width:2rem;}
+      .list_ls ._left img{background-color: #d43c34;width:1.5rem;height:1.5rem;border-radius: 50px;}
+      li.flexBoxSyle{padding:0.5rem;margin-bottom:0.35rem;background-color:#fff;}
+      ._header{margin-bottom:0.7rem;font-size:0.65rem;}
+      ._hleft .app_main_color_font{font-weight:bold;}
+      ._hright{text-align:right;color:#fff;}
+      ._hright span{padding:2px;border-radius:5px;font-size:0.5rem;}
+      ._hright .s{background-color: #3497fc;}
+      .ntime{color:#c7c7c7;font-size:0.5rem;margin-top:0.7rem;}
+      .msg{background-color: #fafafa;padding:0.3rem;border-radius: 3px;color:#c7c7c7;font-size:0.5rem;}
+    </style>
+</head>
+<body>
+<ul class="list_ls"></ul>
+<div class="bottomBox"></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+
+apiready = function(){
+
+	listInitFn();
+
+}
+
+var listFn = function(){
+
+	if(!globalLoadMsgFlag){
+		return false;
+	}
+
+	serverConnect({
+		control:'hyhd',
+		do:'ListHuiyi',
+		page:currentPageIndex,
+		chryId:api.pageParam.chryId,
+		isRefush:1
+	},function(ret){
+
+
+		if(ret.result.length>0){
+
+			currentPageIndex++;
+
+			for(var i=0;i<ret.result.length;i++){
+
+				$api.append($api.dom(".list_ls"),'<li class="flexBoxSyle" tapmode="activebg" onclick="openWinFn(hyhdLinkInfoObj_content,'+ret.result[i].id+');">'+
+						'<div class="_left"><img src="../../image/hyhd.png"/></div>'+
+						'<div class="_right sbox">'+
+								'<div class="_header flexBoxSyle">'+
+										'<div class="_hleft sbox"><span class="app_main_color_font">会议</span>&nbsp;&nbsp;来自'+ret.result[i].username+'</div>'+
+										'<div class="_hright sbox"><span class="s">已开始</span>&nbsp;<span class="i app_main_color">重要</span></div>'+
+								'</div>'+
+								'<div class="content app_main_color_font">'+ret.result[i].hymc+'</div>'+
+								'<div>单位：<span>'+ret.result[i].dangwei+'</span></div>'+
+								'<div>时间：<span>'+ret.result[i].startTime+'('+ret.result[i].week+')</span></div>'+
+								'<div>地点：<span>'+ret.result[i].adress+'</span></div>'+
+								'<div class="ntime">发布时间:'+ret.result[i].newstime+'</div>'+
+								'<div class="msg">共'+ret.result[i].chry+'人，'+ret.result[i].qrch+'人参加</div>'+
+						'</div>'+
+				'</li>');
+				}
+
+			$api.css($api.dom(".bottomBox"),"display:none;");
+			api.parseTapmode();
+
+		}else{
+			$api.css($api.dom(".bottomBox"),"display:block;");
+			$api.html($api.dom(".bottomBox"),"没有更多信息了");
+			globalLastLoadMsgFlag = false;
+		}
+
+	});
+
+}
+
+
+
+</script>
+</html>

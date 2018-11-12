@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/svg.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<script type="text/javascript" src="../script/main.js"></script>
+    <style>
+			*{box-sizing: border-box;}
+    	.info_top{text-align:center;color:#9F9FA0;position:absolute;top:2rem;left:0;width:100%;color:#fff;}
+    	.info_top .header{width:3.3rem; height:3.3rem;vertical-align: top;border-radius:50px;background-color:#fff;padding:0.1rem;}
+			.info_top .name{font-size:0.8rem;padding:0.3rem 0;}
+    	.contro{width:85%;margin:0 auto;color:#9F9FA0;font-size:13px;border-top:1px solid #e3a78e;margin-top:1.2rem;}
+    	.contro li{border-bottom:1px solid #f3f3f3;padding:12px 0;}
+			.contro li img{width:1.5rem;height:1.5rem;}
+			.contro li .uname{text-indent:0.3rem;}
+			.contro li{background-repeat: no-repeat;background-position: center right;background-size:0.6rem 0.6rem;}
+			/*.contro li i{display:inline-block;width:25px;height:25px;vertical-align:top;background-repeat:no-repeat;background-position:center center;}*/
+
+			.flexBoxSyle{
+
+				-webkit-align-items:center;
+				box-align:center;
+				-moz-box-align:center;
+				-webkit-box-align:center;
+				align-items:center;/*垂直居中*/
+
+			}
+
+    </style>
+</head>
+<body>
+
+<img src="../image/me_header.jpg" class="banner_header"/>
+<dl class="info_top">
+	<dt><img class="header" src="../image/me_pic.jpg" onclick="ghtx();"/></dt>
+	<dd class="name"></dd>
+	<dd class="zhiwu"></dd>
+</dl>
+<br>
+<ul class="contro">
+	<li class="flexBoxSyle back2" tapmode="activebg" onclick="openWinFn(hyhdLinkInfoObj);"><img src="../image/m_hy.png"/><div class="uname">我的会议</div></li>
+	<li class="flexBoxSyle back2" tapmode="activebg" onclick="openWinFn(dcjcLinkInfoObj);"><img src="../image/m_db.png"/><div class="uname">我的督办</div></li>
+	<li class="flexBoxSyle back2" tapmode="activebg" onclick="openWinFn(qjspLinkInfoObj);"><img src="../image/m_qj.png"/><div class="uname">我的请假</div></li>
+	<!--<li class="flexBoxSyle back2" tapmode="activebg" onclick="ownqingjia();"><img src="../image/m_sc.png"/><div class="uname">我的收藏</div></li>-->
+	<li class="flexBoxSyle back2" tapmode="activebg" onclick="openWinFn(presonLinkInfoObj);"><img src="../image/m_setting.png"/><div class="uname">个人信息</div></li>
+	<li class="flexBoxSyle back2" tapmode="activebg" onclick="openWinFn(settingxmLinkInfoObj);"><img src="../image/m_setting.png"/><div class="uname">参数设置</div></li>
+	<!--<li class="flexBoxSyle back2" tapmode="activebg" onclick="openAboutMe();"><img src="../image/m_gwyc.png"/><div class="uname">公务用车</div></li>-->
+	<li class="flexBoxSyle back2" tapmode="activebg" onclick="quitFn();" class="quit"><img src="../image/m_exit.png"/><div class="uname">退出登录</div></li>
+</ul>
+<br><br>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+
+$api.html($api.dom(".name"),$api.getStorage("userid"));
+$api.html($api.dom(".zhiwu"),$api.getStorage("zhiwei"));
+
+
+var quitFn = function(){
+
+		$api.clearStorage();
+		api.openWin({
+				name: 'index',
+				url: './login.html',
+				reload:true,
+				slidBackEnabled:false,
+				pageParam: {
+				},
+				animation:{
+					type:"none"
+				}
+		});
+
+
+
+}
+
+
+/*
+var userid = ;
+var signature = $api.getStorage("signature");
+var phone = $api.getStorage("phone");
+var rnd = $api.getStorage("rnd");
+
+
+$api.setStorage("userid",ret.errorMsg.userid);
+$api.setStorage("userpic",ret.errorMsg.touxiang);
+$api.setStorage("phone",ret.errorMsg.phone);
+$api.setStorage("signature",ret.errorMsg.signature);
+$api.setStorage("username",ret.errorMsg.username);
+$api.setStorage("sendCode",ret.errorMsg.sendCode);
+$api.setStorage("zhiwei",ret.errorMsg.zhiwei);
+$api.setStorage("danwei",ret.errorMsg.dangwei);
+$api.setStorage("rnd",ret.errorMsg.rnd);
+*/
+
+
+
+</script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/svg.css"/>
+		<script type="text/javascript" src="../../script/main.js"></script>
+    <style>
+			body{background-color: #f8f8f8;}
+      .list_ls li{padding:0.5rem;border-bottom:1px solid #F3F3F3;}
+      .list_ls li ._left{width:10rem;height:3.5rem;}
+      .list_ls li .all{width:100%;}
+      .list_ls li ._left .header{height:2.7rem;overflow: hidden;}
+      .list_ls li ._left .footer{color:#c7c7c7;font-size:0.5rem;}
+      .list_ls li ._right{text-align: center;}
+      .list_ls li ._right img{width:5rem;height:3.5rem;vertical-align: top;}
+    </style>
+</head>
+<body>
+
+  <ul class="list_ls">
+
+
+  </ul>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+
+apiready = function(){
+
+	var pageParam = api.pageParam;
+
+		api.ajax({
+	    url: webSiteUrl,
+	    method: 'post',
+	    headers: {
+	    },
+	    data: {
+				values: {
+					control:'inform',
+					do:pageParam.do
+				}
+	    }
+	}, function(ret, err) {
+
+	for(var i=0;i<ret.length;i++){
+
+		$api.append($api.dom(".list_ls"),'<li tapmode="activebg" class="flexBoxSyle" onclick="openWinFn(xxgcLinkInfoObj_content);">'+
+			'<div class="_left">'+
+				'<div class="header">'+ret[i].title+'</div>'+
+				'<div class="footer"><span class="zt"><em>10</em>赞赏</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="fd"><em>99</em>评论</span></div>'+
+			'</div>'+
+			'<div class="_right"><img width=100 height=10 src="'+ret[i].titlepic+'"/></div>'+
+		'</li>');
+
+	}
+		api.parseTapmode();
+
+	});
+}
+
+</script>
+</html>

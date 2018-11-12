@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/svg.css"/>
+		<script type="text/javascript" src="../../script/main.js"></script>
+    <style>
+				body{
+					background-color: #f8f8f8;
+				}
+
+				.flexBoxSyle{margin-bottom:0.35rem;background-color: #fff;padding:0.5rem;}
+				.spr .flexBoxSyle{padding:0;}
+				.flexBoxSyle select{vertical-align: top;background-color: #fff;}
+				input,select,textarea{outline:none;border:none;}
+				.dtime{background-color: #fff;}
+				.dtime .fir{border-bottom:1px solid #f3f3f3;}
+				._yj,.spr{background-color: #fff;margin-bottom:0.35rem;padding:0.5rem;}
+				.mkqj .header ._right{text-align:right;}
+				.mkqj .header ._right span{display: inline-block;width:0.8rem;height:0.8rem;background-size:98%;background-repeat: no-repeat;}
+				._yj .header,.spr .header{padding-bottom:0.35rem;border-bottom:1px solid #f3f3f3;}
+				._yj .list,.spr .list{height:100px;}
+				.sbtn{text-align:center;color:#fff;line-height: 1.8rem;margin-top:1.5rem;}
+				.listYj{min-height: 100px;}
+				.list{margin:0;padding:0;overflow: hidden;}
+				.list li{width:16.66666%;text-align:center;float:left;overflow: hidden;height:3.5rem;}
+				.list li img{width:2rem;height:2rem;vertical-align: top;}
+				.list li .sname{margin-top:0.1rem;font-size:0.4rem;}
+
+				.listYj{overflow: hidden;min-height: 2.5rem;}
+				.listYj li{float:left;width:3rem;height:3rem;margin-right:0.3rem;margin-bottom:0.3rem;}
+				.listYj li img{width:100%;height:100%;}
+				.listYj .loadding{background-color: #ccc;color:#000;text-align: center;line-height: 3rem;display: none;}
+    </style>
+</head>
+<body>
+
+      <div class="mkqj">
+      	<div class="top flexBoxSyle">
+      		<div class="_Header">请假类型&nbsp;&nbsp;</div>
+					<select name="qjlx" class="sbox">
+						<option value="1">请假</option>
+						<option value="2">休假</option>
+					</select>
+      	</div>
+      	<ul class="dtime">
+      		<li class="fir flexBoxSyle">
+						<div>开始时间&nbsp;&nbsp;</div>
+						<input class="sbox" type="text" name="startTimelabel" onclick="timeSelect(this,false);" readonly placeholder="开始时间">
+						<input type="hidden" name="startTime" value=""/>
+					</li>
+      		<li class="flexBoxSyle">
+						<div>结束时间&nbsp;&nbsp;</div>
+						<input class="sbox" type="text" name="endTimelabel" onclick="timeSelect(this,false);" readonly placeholder="结束时间"/>
+						<input type="hidden" name="endTime" value=""/>
+					</li>
+      	</ul>
+      	<div class="dday flexBoxSyle">
+      		<div>请假天数&nbsp;&nbsp;</div>
+      		<input type='text' class="sbox" name="days" readonly="readonly" placeholder='请输入请假天数（自动计算）'>
+      	</div>
+      	<div class="qjsy flexBoxSyle">
+      		<div>事&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由&nbsp;&nbsp;</div>
+      		<textarea rows="5" class="sbox" name="sy" placeholder="请说明具体的请假事由"></textarea>
+      	</div>
+      	<div class="_yj">
+      	 	<div class="header flexBoxSyle" style="padding:0;">
+      	 		<div class="_left sbox2">依据(上级文件通知 非必填)</div>
+      	 		<div class="_right addUserLists sbox"><span class="add" onclick="optSelectFn();">&nbsp;</span></div>
+      	 	</div>
+      		<ul class="listYj">
+      			<li class="loadding">0%</li>
+      		</ul>
+	  		</div>
+      	<div class="wctbld flexBoxSyle">
+      		<span>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;</span>
+      		<textarea class="sbox" rows="5" name="bz" placeholder="外出期间临时代行本岗位职责人员姓名及职务"></textarea>
+      	</div>
+      	<div class="bottom spr">
+      		<div class="header flexBoxSyle">
+      			<div class="_left sbox">审批人&nbsp;&nbsp;已选:<span class="num">0</span>人</div>
+      			<div class="_right addUserLists sbox"><span class="add" onclick="openWinFn(addUserLinkInfoObj,hasSelectUserIdsArr);">&nbsp;</span></div>
+      		</div>
+      		<ul class="list"></ul>
+      	</div>
+      </div>
+			<div tapmode="activebg3" onclick="subFn();" class="sbtn app_main_color">提交申请</div>
+			<br><br>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script>
+apiready = function(){
+
+	qiniuObj = api.require('qiniuUpfile');
+
+	api.addEventListener({
+	    name: 'mainConfingAddUser'
+	}, function(ret, err){
+
+		$api.html($api.dom(".list"),'');
+
+		hasSelectUserIdsArr = searchpeddingArr;
+
+		if(hasSelectUserIdsArr.length<=0){
+			return false;
+		}
+
+		$api.html($api.dom(".spr .num"),hasSelectUserIdsArr.length);
+
+		var hasSelectUserIdsStr = hasSelectUserIdsArr.join(",");
+
+		api.ajax({
+				url: webSiteUrl,
+				method: 'post',
+				headers: {
+
+				},data:{
+					values:{
+						control:'MemberCtro',
+						do:'UserListById',
+						userids:hasSelectUserIdsStr
+					}
+				}
+		}, function(ret, err) {
+
+			for(var i in ret.result){
+
+				$api.append($api.dom(".list"),'<li onclick="menuFnu('+ret.result[i].userid+');" class="listLi'+ret.result[i].userid+'"><img src="'+ret.result[i].touxiang+'"/><div class="sname">'+ret.result[i].username+'</div></li>');
+
+			}
+
+		});
+
+	});
+
+
+	api.addEventListener({
+			name: 'mainpending'
+	}, function(ret, err){
+		searchpeddingArr = ret.value.userids;
+	});
+
+	api.addEventListener({
+			name: 'computerDayEvent'
+	}, function(ret, err) {
+
+		var startTime = $api.val($api.dom("input[name=startTime]"));
+		var endTime = $api.val($api.dom("input[name=endTime]"));
+
+		if(startTime!='' && endTime!=''){
+
+				startTime = new Date(startTime).getTime();
+				endTime = new Date(endTime).getTime();
+
+				if(startTime>endTime){
+					alertFn("请选择正确的日期");
+					$api.val($api.dom("input[name=days]"),0);
+				}else{
+						$api.val($api.dom("input[name=days]"),parseInt(Math.abs(endTime- startTime)/1000/60/60/24)+1);
+				}
+
+		}else{
+			$api.val($api.dom("input[name=days]"),0);
+		}
+	});
+
+}
+
+var menuFnu = function(id){
+
+	api.actionSheet({
+	    cancelTitle: '取消',
+	    destructiveTitle: '你确认删除吗？',
+	    buttons: ['确定']
+	}, function(ret, err) {
+	    var index = ret.buttonIndex;
+			if(index==2){
+				$api.remove($api.dom(".listLi"+id));
+				for(var i in hasSelectUserIdsArr){
+					if(hasSelectUserIdsArr[i]==id){
+						hasSelectUserIdsArr.splice(i,1);
+						break;
+					}
+				}
+				$api.html($api.dom(".spr .num"),hasSelectUserIdsArr.length);
+			}
+	});
+}
+
+var subFn = function(){
+
+	if($api.val($api.dom("input[name=startTime]"))==''){
+		alertFn2("请选择开始时间");
+	}else if($api.val($api.dom("input[name=endTime]"))==''){
+		alertFn2("请选择结束时间");
+	}else if($api.val($api.dom("input[name=days]"))=='' || $api.val($api.dom("input[name=days]"))==0){
+		alertFn2("请选正确的时间");
+	}else if($api.val($api.dom("textarea[name=sy]"))==''){
+		alertFn2("请输入事由");
+	}else if(hasSelectUserIdsArr.length<=0){
+		alertFn2("请选择审批人");
+	}else{
+
+		api.confirm({
+			title: '一线服务',
+			msg: '你提交请假申请',
+			buttons: ['确定', '取消']
+		}, function(ret, err) {
+
+			var index = ret.buttonIndex;
+			if(index==1){
+
+				var spr = hasSelectUserIdsArr.join(",");
+				var yjStr = globalImgArr.join(",");
+
+				api.ajax({
+						url: webSiteUrl,
+						method: 'post',
+						headers: {
+						},
+						data: {
+		          values: {
+								control:'qjsq',
+								do:'AddQjsp',
+								qjxx:$api.val($api.dom("select[name=qjlx]")),
+								startTime:$api.val($api.dom("input[name=startTime]")),
+								endTime:$api.val($api.dom("input[name=endTime]")),
+								days:$api.val($api.dom("input[name=days]")),
+								sprId:spr,
+								sy:$api.val($api.dom("textarea[name=sy]")),
+								yj:yjStr,
+								bz:$api.val($api.dom("textarea[name=bz]")),
+								userid:$api.getStorage("userid")
+							}
+					}
+				}, function(ret, err) {
+
+					if(ret.errorno<=0){
+							alertFn4(ret.errorMsg);
+					}else{
+							alertFn3(ret.errorMsg);
+					}
+
+				});
+
+			}
+
+		});
+
+	}
+}
+
+
+
+</script>
+</html>

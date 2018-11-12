@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    	body{
+
+    	}
+    	.list_phone_number table{width:100%;}
+    	.list_phone_number li{
+    		padding:10px 15px;
+    		border-bottom:1px solid #F3F3F3;
+    		display: flex;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			background-color:#fff;
+    	}
+    	.list_phone_number li .header{
+    		width:20%;
+    	}
+    	.list_phone_number li .header img{
+    		display:block;
+    		width:50px;
+    		height:50px;
+    	}
+    	.list_phone_number li .name{
+    		width:65%;
+    		line-height:15px;
+    	}
+    	.list_phone_number li .phone{
+    		width:15%;
+    		background-repeat:no-repeat;
+    		background-position:center center;
+    	}
+    	.list_phone_number li .name .intro{
+    		color:#b5b6b6;
+    		white-space:nowrap;
+			width: 100%;
+			overflow:hidden;
+			font-size:12px;
+    	}
+
+    	.list_phone_number li{
+    		-webkit-tap-highlight-color:rgba(0,0,0,0);
+    	}
+    </style>
+</head>
+<body>
+
+	<ul class="list_phone_number">
+
+		<li tapmode="activebg" onclick="call(this);">
+			<div class="header"><img src="'+ret[i].userpic+'"/></div>
+			<div class="name">
+				<div>'+ret[i].name+'&nbsp;<span class="tel">'+ret[i].phone_num+'</span></div>
+				<div class="intro"><div>'+ret[i].customerTypes+'</div><div>'+ret[i].dangwei+'</div></div>
+			</div>
+			<div class="phone phone2"></div>
+		</li>
+
+
+	</ul>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>

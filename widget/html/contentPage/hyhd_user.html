@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/svg.css"/>
+		<script type="text/javascript" src="../../script/main.js"></script>
+    <style>
+		body{background-color: #f8f8f8;}
+		.toplevel.flexBoxSyle,.beizhu.flexBoxSyle{padding:0.5rem;margin-bottom:0.35rem;background-color:#fff;}
+		.toplevel.flexBoxSyle ._left{width:2rem;}
+		.toplevel.flexBoxSyle ._left img{background-color: #d43c34;width:1.5rem;height:1.5rem;border-radius: 50px;}
+		.toplevel.flexBoxSyle ._header{margin-bottom:0.7rem;font-size:0.65rem;}
+		.toplevel.flexBoxSyle ._hleft .app_main_color_font{font-weight:bold;}
+		.toplevel.flexBoxSyle ._hright{text-align:right;color:#fff;}
+		.toplevel.flexBoxSyle ._hright span{padding:2px;border-radius:5px;font-size:0.5rem;}
+		.toplevel.flexBoxSyle ._hright .s{background-color: #3497fc;}
+		.toplevel.flexBoxSyle .ntime{color:#c7c7c7;font-size:0.5rem;margin-top:0.7rem;}
+    .beizhu.flexBoxSyle ._right{color:#999;}
+		.beizhu ._left{width:2rem;}
+		.qjspbtn{display:none;}
+  /*  .sbtn{display:none;}*/
+    </style>
+</head>
+<body>
+
+	<div class="toplevel flexBoxSyle">
+			<div class="_left"><img class="header" src=""/></div>
+			<div class="_right sbox">
+        <div class="_header flexBoxSyle">
+            <div class="_hleft sbox"><span>姓名</span>&nbsp;&nbsp;<span class="uname"></span></div>
+        </div>
+          <div>联系电话：<span class="tel"></span></div>
+					<div>职位：<span class="zw"></span></div>
+					<div>单位：<span class="dw"></span></div>
+			</div>
+	</div>
+
+	<div class="beizhu flexBoxSyle">
+		<div class="sbox">参会</div>
+    <div class="sbox4 _right ch"></div>
+	</div>
+  <div class="beizhu flexBoxSyle">
+		<div class="sbox">请假</div>
+    <div class="sbox4 _right qj"></div>
+	</div>
+	<div class="beizhu flexBoxSyle">
+		<div class="sbox">事由</div>
+    <div class="sbox4 _right sy"></div>
+	</div>
+	<div class="beizhu flexBoxSyle">
+		<div class="sbox">审批意见</div>
+    <div class="sbox4 _right spyj"></div>
+	</div>
+
+  <div tapmode="activebg3" onclick="spqjFn();" class="sbtn app_main_color qjspbtn">允许请假</div>
+	<div tapmode="activebg3" onclick="jjqjFn();" class="sbtn app_main_color qjspbtn">拒绝请假</div>
+	<div tapmode="activebg3" onclick="cannelHyFn();" class="sbtn app_main_color">取消参会资格</div>
+
+	<br><br>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+
+apiready = function(){
+	initFn();
+
+	api.addEventListener({
+			name: 'setHyUpEvent'
+	}, function(ret, err) {
+			initFn();
+	});
+
+}
+
+var initFn = function(){
+
+	api.ajax({
+		url: webSiteUrl,
+		method: 'post',
+		headers: {
+		},
+		data: {
+			values:{
+				control:'Hyhd',
+				do:'HyUserInfo',
+				cid:api.pageParam.param.cid,
+				uid:api.pageParam.param.userid,
+				userid:$api.getStorage("userid")
+			}
+		}
+	}, function(ret, err) {
+
+		console.log(JSON.stringify(ret));
+
+		$api.html($api.dom(".uname"),ret.result.username);
+		$api.html($api.dom(".tel"),ret.result.phone);
+		$api.html($api.dom(".zw"),ret.result.zhiwei);
+		$api.html($api.dom(".dw"),ret.result.dangwei);
+		$api.attr($api.dom(".header"),'src',ret.result.touxiang);
+
+		$api.html($api.dom(".beizhu .ch"),ret.result.qrch);
+		$api.html($api.dom(".beizhu .qj"),ret.result.hyqj);
+
+		$api.html($api.dom(".beizhu .sy"),ret.result.qjrxx);
+		$api.html($api.dom(".beizhu .spyj"),ret.result.sprxx);
+
+		if(ret.result.is_ataty==1 && ret.result.is_hyqjsp==1){
+
+			$(".qjspbtn").css("display","block");
+
+		}else{
+
+			$(".qjspbtn").css("display","none");
+
+		}
+
+
+	});
+
+}
+
+
+var spqjFn = function(){
+
+	api.ajax({
+			url: webSiteUrl,
+			method: 'post',
+			headers: {
+			},
+			data: {
+				values:{
+					control:'Hyhd',
+					do:'CheckHyqj',
+					cid:api.pageParam.param.cid,
+					uid:api.pageParam.param.userid,
+					op:1,
+					userid:$api.getStorage("userid")
+				}
+			}
+	}, function(ret, err) {
+
+		api.sendEvent({
+			name: 'setHyUpEvent',
+			extra: {}
+		});
+
+		if(ret){
+			if(ret.errorno==0){
+				alertFn3(ret.errorMsg);
+			}else{
+				alertFn2(ret.errorMsg);
+			}
+		}
+
+			console.log(JSON.stringify(ret));
+	});
+
+}
+
+
+var jjqjFn = function(){
+
+	openWinFn(HyhdSpLinkInfoObj,{'cid':api.pageParam.param.cid,'uid':api.pageParam.param.userid});
+
+}
+
+var cannelHyFn = function(){
+
+	api.ajax({
+			url: webSiteUrl,
+			method: 'post',
+			headers: {
+			},
+			data: {
+				values:{
+					control:'Hyhd',
+					do:'CannelChUser',
+					cid:api.pageParam.param.cid,
+					uid:api.pageParam.param.userid,
+					userid:$api.getStorage("userid")
+				}
+			}
+	}, function(ret, err) {
+
+		if(ret){
+			if(ret.errorno==0){
+				alertFn3(ret.errorMsg);
+
+				setTimeout(function(){
+
+					api.closeWin();
+
+				},1000);
+
+			}else{
+				alertFn2(ret.errorMsg);
+			}
+		}
+
+			console.log(JSON.stringify(ret));
+	});
+
+}
+
+
+
+
+</script>
+</html>

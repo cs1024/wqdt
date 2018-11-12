@@ -1,0 +1,571 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Font Face Import */
+@font-face {
+    font-family: 'kalingaregular';
+    src: url('../font/kalinga.eot');
+    src: url('../font/kalinga.eot?#iefix') format('embedded-opentype'),
+         url('../font/kalinga.woff') format('woff'),
+         url('../font/kalinga.ttf') format('truetype'),
+         url('../font/kalinga.svg#kalingaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+    /**
+    * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+    * http://cssreset.com
+    */
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+    display: block;
+    }
+    body {
+    line-height: 1;
+    }
+    ol, ul {
+    list-style: none;
+    }
+    blockquote, q {
+    quotes: none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+    content: '';
+    content: none;
+    }
+    table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+
+/* Nice Ease-In For Links Hover */
+a { 
+-webkit-transition: all 0.3s ease-in;
+-moz-transition: all 0.3s ease-in;
+-o-transition: all 0.3s ease-in; 
+}
+
+/* Clear */
+#clear {
+	clear:both;
+}
+
+
+
+
+/************************/
+/* Buttons Global Style */
+/************************/
+.button i {
+	padding:1px 5px 0px 0px;
+}
+
+.button-rectangle i {
+	padding:1px 5px 0px 0px;
+}
+
+.button-leaf i {
+	padding:1px 5px 0px 0px;
+}
+
+/************************/
+/* Buttons Square Style */
+/************************/
+.button {
+    font-family: 'kalingaregular';
+	text-decoration:none !important;
+}
+
+.button a {
+	display:block;
+	text-decoration:none;
+}
+
+/***************************/
+/* Buttons Rectangle Style */
+/***************************/
+.button-rectangle {
+    font-family: 'kalingaregular';
+	text-decoration:none !important;
+	-moz-border-radius:7px ;
+    /* Safari v3.0+ and by Chrome v0.2+ */
+    -webkit-border-radius:7px ;
+    /* Firefox v4.0+ , Safari v5.0+ , Chrome v4.0+ , Opera v10.5+  and by IE v9.0+ */
+    border-radius:7px ;
+}
+
+.button-rectangle a {
+	display:block;
+	text-decoration:none;
+}
+
+/***************************/
+/* Buttons Leaf Style */
+/***************************/
+.button-leaf {
+    font-family: 'kalingaregular';
+	text-decoration:none !important;
+	-moz-border-top-left-radius:7px ;
+    /* Safari v3.0+ and by Chrome v0.2+ */
+    -webkit-border-top-left-radius:7px ;
+    /* Firefox v4.0+ , Safari v5.0+ , Chrome v4.0+ , Opera v10.5+  and by IE v9.0+ */
+    border-top-left-radius:7px ;
+	
+	-moz-border-bottom-right-radius:7px ;
+    /* Safari v3.0+ and by Chrome v0.2+ */
+    -webkit-border-bottom-right-radius:7px ;
+    /* Firefox v4.0+ , Safari v5.0+ , Chrome v4.0+ , Opera v10.5+  and by IE v9.0+ */
+    border-bottom-right-radius:7px ;
+}
+
+.button-leaf a {
+	display:block;
+	text-decoration:none;
+}
+
+/****************/
+/* Button Sizes */
+/****************/
+.large {
+	padding:11px 44px 7px 44px;
+	font-size:23px;
+}
+
+.medium {
+	padding:10px 44px 6px 44px;
+	font-size:19px;
+}
+
+.small {
+	padding:9px 44px 5px 44px;
+	font-size:16px;
+}
+
+/********************/
+/* Button Colors */
+/********************/
+
+/* Easy Black */
+.easy-black {
+	background:#2F3738;
+	color:#FFF;
+}
+
+.easy-black:hover {
+	background:#647678;
+}
+
+/* Frost Black */
+.frost-black {
+	background:#2F3738;
+	color:#9FBCBF;
+}
+
+.frost-black:hover {
+	background:#647678;
+}
+
+/* Frostbite Light */
+.frostbite-light {
+	background:#9FBCBF;
+	color:#FFF;
+}
+
+.frostbite-light:hover {
+	background:#647678;
+}
+
+/* Frostbite Light */
+.frostbite-dark {
+	background:#647678;
+	color:#FFF;
+}
+
+.frostbite-dark:hover {
+	background:#9FBCBF;
+}
+
+/* Dark Blue */
+.dark-blue {
+	background:#046380;
+	color:#FFF;
+}
+
+.dark-blue:hover {
+	background:#1695A3;
+}
+
+/* Medium Blue */
+.medium-blue {
+	background:#1695A3;
+	color:#FFF;
+}
+
+.medium-blue:hover {
+	background:#ACF0F2;
+}
+
+/* Light Blue */
+.light-blue {
+	background:#ACF0F2;
+	color:#000;
+}
+
+.light-blue:hover {
+	background:#1695A3;
+}
+
+/* Deep Blue */
+.deep-blue {
+	background:#445878;
+	color:#FFF;
+}
+
+.deep-blue:hover {
+	background:#1695A3;
+}
+
+/* Sea Green */
+.sea-green {
+	background:#468966;
+	color:#FFF;
+}
+
+.sea-green:hover {
+	background:#95AB63;
+}
+
+/* Grass Green */
+.grass-green {
+	background:#95AB63;
+	color:#FFF;
+}
+
+.grass-green:hover {
+	background:#BDD684;
+}
+
+/* Light Green */
+.light-green {
+	background:#BDD684;
+	color:#000;
+}
+
+.light-green:hover {
+	background:#95AB63;
+}
+
+/* Medium Green */
+.medium-green {
+	background:#5C832F;
+	color:#FFF;
+}
+
+.medium-green:hover {
+	background:#284907;
+}
+
+/* Dark Green */
+.dark-green {
+	background:#284907;
+	color:#FFF;
+}
+
+.dark-green:hover {
+	background:#5C832F;
+}
+
+/* Skin Orange */
+.skin-orange {
+	background:#F2836B;
+	color:#FFF;
+}
+
+.skin-orange:hover {
+	background:#F9C2B6;
+}
+
+/* Orange Classic */
+.classic-orange {
+	background:#FCA600;
+	color:#FFF;
+}
+
+.classic-orange:hover {
+	background:#EE8900;
+}
+
+/* Orange Light */
+.light-orange {
+	background:#EE8900;
+	color:#FFF;
+}
+
+.light-orange:hover {
+	background:#DE6D00;
+}
+
+/* Orange Medium */
+.medium-orange {
+	background:#DE6D00;
+	color:#FFF;
+}
+
+.medium-orange:hover {
+	background:#D23600;
+}
+
+/* Orange Dark */
+.dark-orange {
+	background:#D23600;
+	color:#FFF;
+}
+
+.dark-orange:hover {
+	background:#DE6D00;
+}
+
+/* Yellow Classic */
+.classic-yellow {
+	background:#FFFF00;
+	color:#000;
+}
+
+.classic-yellow:hover {
+	background:#CCCC00;
+}
+
+/* Yellow Dirty */
+.dirty-yellow {
+	background:#CCCC00;
+	color:#FFF;
+}
+
+.dirty-yellow:hover {
+	background:#FFFF00;
+}
+
+/* Red Pale */
+.pale-red {
+	background:#F2594B;
+	color:#FFF;
+}
+
+.pale-red:hover {
+	background:#CD2C24;
+}
+
+/* Red Light */
+.light-red {
+	background:#CD2C24;
+	color:#FFF;
+}
+
+.light-red:hover {
+	background:#F2594B;
+}
+
+/* Red Medium */
+.medium-red {
+	background:#94090D;
+	color:#FFF;
+}
+
+.medium-red:hover {
+	background:#CD2C24;
+}
+
+/* Red Dark */
+.dark-red {
+	background:#450003;
+	color:#FFF;
+}
+
+.dark-red:hover {
+	background:#94090D;
+}
+
+/* Pale Pink */
+.pale-pink {
+	background:#F6B1C3;
+	color:#FFF;
+}
+
+.pale-pink:hover {
+	background:#F0788C;
+}
+
+/* Light Pink */
+.light-pink {
+	background:#F0788C;
+	color:#FFF;
+}
+
+.light-pink:hover {
+	background:#F6B1C3;
+}
+
+/* Medium Pink */
+.medium-pink {
+	background:#DE264C;
+	color:#FFF;
+}
+
+.medium-pink:hover {
+	background:#F0788C;
+}
+
+/* Dark Pink */
+.dark-pink {
+	background:#A50C5C;
+	color:#FFF;
+}
+
+.dark-pink:hover {
+	background:#DE264C;
+}
+
+/* Light Purple */
+.light-purple {
+	background:#9768D1;
+	color:#FFF;
+}
+
+.light-purple:hover {
+	background:#553285;
+}
+
+/* Medium Purple */
+.medium-purple {
+	background:#553285;
+	color:#FFF;
+}
+
+.medium-purple:hover {
+	background:#9768D1;
+}
+
+/* Dark Purple */
+.dark-purple {
+	background:#36175E;
+	color:#FFF;
+}
+
+.dark-purple:hover {
+	background:#553285;
+}
+
+/* Metal Gray */
+.metal-gray {
+	background:#A2ABA5;
+	color:#FFF;
+}
+
+.metal-gray:hover {
+	background:#B5BCB7;
+}
+
+/* Dark Gray */
+.dark-gray {
+	background:#595855;
+	color:#FFF;
+}
+
+.dark-gray:hover {
+	background:#A2ABA5;
+}
+
+/* Dirty Gray */
+.dirty-gray {
+	background:#8C8681;
+	color:#FFF;
+}
+
+.dirty-gray:hover {
+	background:#595855;
+}
+
+/* Frog Green */
+.frog-green {
+	background:#999900;
+	color:#FFF;
+}
+
+.frog-green:hover {
+	background:#BDBD59;
+}
+
+/* Pastel Orange */
+.pastel-orange {
+	background:#FF6138;
+	color:#FFF;
+}
+
+.pastel-orange:hover {
+	background:#FF9073;
+}
+
+/* Pastel Yellow */
+.pastel-yellow {
+	background:#FFFF9D;
+	color:#000;
+}
+
+.pastel-yellow:hover {
+	background:#FFFF1A;
+}
+
+/* Pastel Lioght Green */
+.pastel-light-green {
+	background:#BEEB9F;
+	color:#FFF;
+}
+
+.pastel-light-green:hover {
+	background:#79BD8F;
+}
+
+/* Pastel Medium Green */
+.pastel-medium-green {
+	background:#79BD8F;
+	color:#FFF;
+}
+
+.pastel-medium-green:hover {
+	background:#BEEB9F;
+}
+
+/* Pastel Dark Green */
+.pastel-dark-green {
+	background:#00A388;
+	color:#FFF;
+}
+
+.pastel-dark-green:hover {
+	background:#79BD8F;
+}
+	

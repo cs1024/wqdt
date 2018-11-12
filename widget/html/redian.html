@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/svg.css"/>
+	<style>
+
+			.flexBoxSyle li{
+				text-align:center;
+				line-height: 1.8rem;
+			}
+
+	</style>
+</head>
+<body>
+	<ul class="listchengbaodh flexBoxSyle">
+		<li onclick="tagFn(this,0);" class="app_main_color_font sbox">区政府</li>
+		<li onclick="tagFn(this,1);" class="sbox">人大</li>
+		<li onclick="tagFn(this,2);" class="sbox">政法</li>
+	</ul>
+	<div id="main">
+
+
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+apiready = function(){
+
+	var pageParam = api.pageParam;
+
+	api.addEventListener({
+    name: 'chengbaoevent'
+	}, function(ret, err) {
+
+			var bool = ret.value.index==2?false:true;
+
+			api.setFrameGroupAttr({
+			    name: 'chengbao',
+			    hidden: bool
+			});
+
+	});
+
+	api.openFrameGroup({
+		name: 'chengbao',
+		rect: {
+				x: 0,
+				y: pageParam.yHeight+$api.dom(".listchengbaodh").offsetHeight,
+				w: 'auto',
+				h: pageParam.hHeight-$api.dom(".listchengbaodh").offsetHeight
+		},
+		frames: [{
+				name: 'quzhengfu',
+				url: './chenbao/quzhengfu.html',
+				bgColor: '#fff'
+		}, {
+				name: 'renda',
+				url: './chenbao/renda.html',
+				bgColor: '#fff'
+		}, {
+				name: 'zhengfa',
+				url: './chenbao/zhengfa.html',
+				bgColor: '#fff'
+		}]
+	}, function(ret, err) {
+		var index = ret.index;
+
+		$(".listchengbaodh li").removeClass("app_main_color_font");
+		$(".listchengbaodh li").eq(index).addClass("app_main_color_font");
+
+	});
+
+}
+
+function tagFn(obj,num){
+
+	$(".listchengbaodh li").removeClass("app_main_color_font");
+	$(obj).addClass("app_main_color_font");
+
+	api.setFrameGroupIndex({
+	    name: 'chengbao',
+	    index: num
+	});
+
+}
+
+</script>
+</html>

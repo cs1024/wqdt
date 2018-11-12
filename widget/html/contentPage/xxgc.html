@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/svg.css"/>
+    <style>
+    	body{
+        background-color: #f8f8f8;
+    	}
+      .header1{
+        padding:0.6rem 0.5rem 0 0.5rem;
+        background-color: #fff;
+      }
+      .header1 .title{
+        font-size:0.7rem;
+        padding-bottom:1rem;
+      }
+      .header1 .ftitle{
+        color:#c7c7c7;
+        font-size:0.5rem;
+        border-bottom:1px solid #f3f3f3;
+        padding-bottom:0.3rem;
+      }
+      .header1 .ntime{
+        text-align:right;
+      }
+      .content_x{padding:0.8rem 0.5rem;background-color: #fff;}
+      .zanshan{margin-top:0.35rem;background-color: #fff;padding:0.8rem;text-align: center;font-size:0.5rem;}
+      .zanshan button{background-color: #e15500;color:#fff;padding:0.3rem 0.6rem;border-radius: 3px;margin-bottom: 0.6rem;}
+      .zanshan .list_user{margin-top:0.8rem;}
+      .plHeader{background-color: #fff;margin-top:0.35rem;padding:0.5rem;color:#c7c7c7;border-bottom:1px solid #f3f3f3;}
+      .list_user{
+        overflow: hidden;
+      }
+
+      .list_user li{
+        width:20%;
+        float:left;
+        line-height: 0.8rem;
+      }
+
+    </style>
+</head>
+<body>
+
+  <div class="header1">
+    <div class="title">这是标题这是标题这是标题这是标题</div>
+    <div class="ftitle flexBoxSyle"><div class="fwrite sbox">来源:<span>福清网</span></div><div class="ntime sbox">发布时间:<span>2018-08-09</span></div></div>
+  </div>
+  <div class="content_x">这是中文内容这是中文内容这是中文内容这是中文内容这是中文内容这是中文内容这是中文内容这是中文内容这是中文内容</div>
+  <div class="zanshan">
+    <button>赞赏</button>
+    <div class="total"><span>3</span>人赞赏</div>
+    <ul class="list_user">
+      <li>姓名01</li>
+      <li>姓名01</li>
+      <li>姓名01</li>
+      <li>姓名01</li>
+      <li>姓名01</li>
+      <li>姓名01</li>
+      <li>姓名01</li>
+      <li>姓名01</li>
+      <li>姓名01</li>
+    </ul>
+    <div class="addMore_gcls" onclick="addMoreZs();"></div>
+  </div>
+  <div class="plHeader">评论(<span>3</span>)</div>
+  <ul class="pl">
+
+    <li class="plli'+result.pl[i].id+'">'+
+					<div class="uheader"><img src="'+result.pl[i].pic+'"/></div>
+					<div class="info">
+            <div class="ptitle"><div class="h"><span class="name">姓名01</span></div><div class="h del">&nbsp;</div></div>
+						<div>这是正文这是正文这是正文</div>
+              <div class="footer"><span class="time">2018-08-09</span><span class="_ri"><span class="dz" onclick="plFun(this,'+result.pl[i].id+');"></span><span class="num">3</span></span></div>
+					</div>
+				</li>
+
+  </ul>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+
+
+</script>
+</html>

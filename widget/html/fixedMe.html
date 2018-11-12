@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/svg.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <style>
+    	body{
+          background-color: #f8f8f8;
+    	}
+    	.listInfo{
+    		margin-top:30px;
+    	}
+
+    	.listInfo li{
+    		padding:15px 8px;
+    		margin-bottom:10px;
+    		background-color:#fff;
+    	}
+
+
+    	.listInfo li span{
+    		color:#999;
+    	}
+
+    	.setHeader{
+    		display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			line-height:50px;
+    	}
+    	.setHeader .n1{
+    		width:50%;
+    	}
+    	.setHeader .img1{
+    		text-align:right;
+    		width:50%;
+    	}
+    	.setHeader .img1 img{
+    		vertical-align:top;
+    	}
+    </style>
+</head>
+<body>
+	<ul class="listInfo">
+		<li class="setHeader" tapmode="activebg" onclick="ghtx()"><div class="n1">设置头像：</div><div class="img1"><img width='50' height='50' src=""></div></li>
+		<li class="name"><label>姓名：</label><span></span></li>
+		<li class="tel"><label>手机：</label><span></span></li>
+		<li class="zw"><label>职位：</label><span></span></li>
+		<li class="dw"><label>单位：</label><span></span></li>
+		<li class="appversion"><label>APP版本：</label><span></span></li>
+	</ul>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+
+	apiready = function(){
+
+  /*
+		$api.html($api.dom(".listInfo .name span"),$api.getStorage('username'));
+		$api.html($api.dom(".listInfo .zw span"),$api.getStorage('zhiwei'));
+		$api.html($api.dom(".listInfo .dw span"),$api.getStorage('danwei'));
+		$api.html($api.dom(".listInfo .tel span"),$api.getStorage('mycall'));
+		$api.html($api.dom(".listInfo .appversion span"),'V'+api.appVersion);
+		$api.attr($api.dom(".listInfo .setHeader img"),'src',$api.getStorage('userpic'));
+    */
+	};
+
+</script>
+</html>

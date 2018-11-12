@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/svg.css"/>
+		<script type="text/javascript" src="../../script/main.js"/></script>
+    <style>
+			.flexBoxSyle li{
+				text-align:center;
+				line-height: 1.8rem;
+				border-bottom:1px solid #f3f3f3;
+				position: relative;
+			}
+			.listchengbaodh li.active{
+
+				color:#d43c34;
+
+			}
+			.listchengbaodh li.active:before{
+
+				content: " ";
+				position: absolute;
+				left: 30%;
+				top: 1.7rem;
+				width: 40%;
+				height: 5px;
+				border-top: 5px solid #d43c34;
+				color: #d43c34;
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+				-webkit-transform: scaleY(0.5);
+				transform: scaleY(0.5);
+			}
+
+			.buttom{
+				height:1.8rem;
+				border-top:1px solid #f3f3f3;
+				padding:0.6rem 0;
+			}
+
+			.sbtn2{text-align:center;color:#fff;line-height: 1.8rem;background-color:#d43c34;width:95%;margin:0 auto;border-radius: 5px;}
+			/*.sbtn2 button{color:#fff;outline:none;} class="sbtn2 app_main_color"*/
+
+			.btnbox button{
+					display: block;
+					text-align:center;color:#fff;line-height: 1.8rem;width:95%;margin:0 auto;border-radius: 5px;
+					outline: none;
+			}
+			.btnbox button.mbtn{width:45%;}
+
+			.gray{background-color: #ccc;}
+
+    </style>
+</head>
+<body>
+	<div id="wrap">
+				<div id="frameHeader" class="flexBoxSyle app_main_color">
+					<div class="sbox flexBoxSyle">
+						<a class="back" href="javascript:void(0);" onclick="backFn();" tapmode="activebg2">返回</a>
+						<span class="tname"></span>
+					</div>
+          <div class="sbox r flexBoxSyle" style="display:block!important;">
+						<a href="javascript:void(0);" class="search2" onclick="openWin_inner2();" tapmode="activebg2">&nbsp;</a>&nbsp;&nbsp;
+            <span class="addName"></span>
+            <a href="javascript:void(0);" class="back5" onclick="openWin_inner();" tapmode="activebg2">&nbsp;</a>
+          </div>
+				</div>
+				<ul class="listchengbaodh flexBoxSyle">
+
+				</ul>
+     		<div id="main"></div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+
+	apiready = function(){
+
+		  //获取参数
+			var pageParam = api.pageParam;
+
+		  //状态栏
+		  var statusBarAppearance = api.statusBarAppearance;
+		  if(statusBarAppearance){
+		    $api.css($api.dom("#frameHeader"),"padding-top:0.8rem;");
+		    $api.css($api.dom(".addMore"),"top:0.8rem;");
+		  }
+
+		  $_title = $api.dom("#frameHeader span.tname");
+		  $api.html($_title,pageParam.title);
+
+      if(pageParam.isAdd){
+				$api.css($api.dom("#frameHeader .r"),"display:block;");
+				$api.html($api.dom("#frameHeader .addName"),pageParam.addName);
+			}
+
+		  for(var i=0;i<pageParam.iurl.length;i++){
+		    //pageParam.iurl[i].pageParam = pageParam.pagecs;
+		    $api.append($api.dom(".listchengbaodh"),'<li onclick="openFuncomm(this,'+i+',\''+pageParam.frameName+'\');" class="sbox">'+pageParam.iurl[i].name+'<span class="fbox'+i+'"></span></li>');
+		  }
+
+			$(".listchengbaodh li:first-child").addClass("active");
+
+		  var winHeight = api.winHeight;
+		  var frame_h = winHeight - ($api.dom("#frameHeader").offsetHeight+$api.dom(".listchengbaodh").offsetHeight);
+
+		  api.openFrameGroup({
+		    name:pageParam.frameName,
+		    preload:1,
+		    rect: {
+		        x: 0,
+		        y: $api.dom("#frameHeader").offsetHeight+$api.dom(".listchengbaodh").offsetHeight,
+		        w: 'auto',
+		        h: frame_h
+		    },
+		    index:0,
+		    scrollEnabled:false,
+		    frames:pageParam.iurl,
+		  }, function(ret, err) {
+		    var index = ret.index;
+		  });
+
+			api.addEventListener({
+					name: 'userTotal'
+			}, function(ret, err) {
+				$api.html($api.dom(".fbox1"),"("+ret.value.num+")");
+			});
+
+			api.addEventListener({
+			    name: 'setMainBtnEvent'
+			}, function(ret, err){
+
+				$api.html($api.dom(".btnbox"),ret.value.bottom);
+
+			});
+
+
+	};
+	var openWin_inner = function(){
+	  if(api.pageParam.iurl2==undefined){
+	    alertFn2("参数错误");
+	    return false;
+	  }
+	  openWinFn(api.pageParam.iurl2);
+	}
+
+	var openWin_inner2 = function(){
+	  if(api.pageParam.iurl3==undefined){
+	    alertFn2("参数错误");
+	    return false;
+	  }
+	  openWinFn(api.pageParam.iurl3);
+	}
+
+	var openFuncomm = function (obj,index,frameName){
+
+		$(".listchengbaodh li").removeClass("active");
+		$(obj).addClass("active");
+
+	  api.setFrameGroupIndex({
+	      name: frameName,
+	      index: index
+	  });
+	}
+
+	var operatorFn = function(op){
+
+		api.sendEvent({
+				name: 'operatorFnEvent',
+				extra: {
+					opid:op
+				}
+		});
+
+	}
+
+
+</script>
+</html>
