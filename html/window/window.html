@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/svg.css"/>
+		<script type="text/javascript" src="../../script/main.js"/></script>
+    <style>
+    	body{
+
+    	}
+			._search,.search_link,.search_link2{
+					background-color:#fff;
+					padding:0.4rem;
+					border-bottom:1px solid #f3f3f3;
+					display:none;
+			}
+			.search_link .box,.search_link2 .box{
+				background:#f3f3f3;
+				text-align:center;
+				padding:0.3rem 0;
+				color:#8a8a8a;
+				line-height: 0.8rem;
+			}
+			.search_link .box img,.search_link2 .box img{
+				width:0.8rem;
+				vertical-align: middle;
+			}
+
+			._search button{
+				background:#f3f3f3;
+				outline: none;
+				height:1.8rem;
+				line-height: 1.8rem;
+				text-align: center;
+			}
+			._search input{
+				display: table-cell;
+				background:#f3f3f3;
+				vertical-align: top;
+				height:1.8rem;
+				display: block;
+				outline:none;
+				text-align:left;
+			}
+			._search span{
+				height:1.8rem;
+				width:2rem;
+				background-color:#f3f3f3;
+				white-space: nowrap;
+				vertical-align: middle;
+				text-align:center;
+				background-repeat: no-repeat;
+				background-position: center center;
+				display: block;
+			}
+			#frameHeader{
+				align-items:center;
+				-webkit-align-items:center;
+				box-align:center;
+				-moz-box-align:center;
+				-webkit-box-align:center;
+			}
+			.buttom{
+				height:1.8rem;
+				border-top:1px solid #f3f3f3;
+				padding:0.6rem 0;
+			}
+			.btnbox button{
+					display: block;
+					text-align:center;color:#fff;line-height: 1.8rem;margin:0 auto;border-radius: 5px;
+					width:95%;
+					outline: none;
+			}
+			.btnbox button.mbtn{width:45%;}
+			.gray{background-color: #ccc;}
+			.noneStyle{display:none;}
+    </style>
+</head>
+<body>
+	<div id="wrap">
+        <div id="frameHeader" class="flexBoxSyle app_main_color">
+					<div class="sbox flexBoxSyle">
+	        	<a class="back" href="javascript:void(0);" onclick="backFn();" tapmode="activebg2">返回</a>
+            <span class="tname"></span>
+						<!--<span style="padding:2px 0 0 0.2rem;"><img style="width:0.6rem;height:0.6rem;vertical-align:center;" src="../../image/loadding.gif"/></span>-->
+					</div>
+					<div class="sbox r flexBoxSyle">
+						<a href="javascript:void(0);" class="search2" onclick="openWin_inner2();" tapmode="activebg2">&nbsp;</a>&nbsp;&nbsp;
+						<span class="addName"></span>
+						<a href="javascript:void(0);" class="back5" onclick="openWin_inner();" tapmode="activebg2">&nbsp;</a>
+					</div>
+					<div class="sbox confirmAdd">
+						<span>已选择<i>0</i>人</span>
+					</div>
+					<div class="sbox selectUser flexBoxSyle">
+						<span class="addName">添加用户</span>
+						<a href="javascript:void(0);" class="back5" onclick="openWin_inner_select();" tapmode="activebg2">&nbsp;</a>
+					</div>
+					<div class="sbox confirmSelect" onclick="addUserFn();">
+						<span tapmode="activebg2" style="padding:0 10px;">确认</span>
+					</div>
+        </div>
+				<div class="_search">
+					<div class="flexBoxSyle">
+						<span class="search"></span>
+						<input class="sbox4 keyboard" type="search" onsearch="searchFn();" placeholder="请输入搜索内容"/>
+						<button class="sbox" tapmode="activebg" onclick="searchFn();">搜索</button>
+					</div>
+				</div>
+				<div class="search_link" onclick="searchEvenFn();">
+					<div class="box back"><img src="../../image/search.png"/>&nbsp;搜索</div>
+				</div>
+     		<div id="main">
+
+     		</div>
+				<div class="buttom btnbox noneStyle">
+				</div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+
+	apiready = function(){
+
+			//获取参数
+			var pageParam = api.pageParam;
+
+			//状态栏
+			var statusBarAppearance = api.statusBarAppearance;
+			if(statusBarAppearance){
+				$api.css($api.dom("#frameHeader"),"padding-top:0.8rem;");
+				$api.css($api.dom(".addMore"),"top:0.8rem;");
+			}
+
+			var frame_y = $api.dom("#frameHeader").offsetHeight;
+			var frame_h = api.winHeight - $api.dom("#frameHeader").offsetHeight;
+
+			if(pageParam.isAdd){
+				$api.css($api.dom("#frameHeader .r"),"display:block;");
+				$api.html($api.dom("#frameHeader .addName"),pageParam.addName);
+			}
+			if(pageParam.isCon){
+				$api.css($api.dom("#frameHeader .confirmAdd"),"display:block;");
+			}
+			if(pageParam.isAdU){
+				$api.css($api.dom("#frameHeader .selectUser"),"display:block;");
+			}
+			if(pageParam.isCons){
+				$api.css($api.dom("#frameHeader .confirmSelect"),"display:block;");
+			}
+			if(pageParam.isSearch){
+				$api.css($api.dom("._search"),'display:block');
+				frame_y += $api.dom("._search").offsetHeight;
+				frame_h -= $api.dom("._search").offsetHeight;
+			}
+			if(pageParam.isSearchLink){
+				$api.css($api.dom(".search_link"),'display:block');
+				frame_y += $api.dom(".search_link").offsetHeight;
+				frame_h -= $api.dom(".search_link").offsetHeight;
+			}
+
+			if(pageParam.isBtn){
+
+				$api.removeCls($api.dom(".buttom"), 'noneStyle');
+				$api.addCls($api.dom(".buttom"), 'flexBoxSyle');
+				frame_h -= $api.dom(".buttom").offsetHeight;
+			}
+
+			//设置标题头
+			$_title = $api.dom("#frameHeader span.tname");
+			$api.html($_title,pageParam.title);
+
+			if(pageParam.pagecs==undefined)
+				pageParam.pagecs = {};
+
+			api.openFrame({
+					name:pageParam.frameName,
+					url: pageParam.iurl,
+					vScrollBarEnabled:true,
+					reload:true,
+					rect: {
+							x: 0,
+							y: frame_y,
+							w: 'auto',
+							h: frame_h
+					},
+					pageParam: pageParam.pagecs,
+					allowEdit:true,
+				animation:{
+					type:"none"
+				}
+			});
+
+			api.addEventListener({
+					name: 'addTotal'
+			}, function(ret, err) {
+				$api.html($api.dom(".confirmAdd i"),ret.value.num);
+			});
+
+			api.addEventListener({
+			    name: 'setMainBtnEvent'
+			}, function(ret, err){
+
+				$api.html($api.dom(".btnbox"),ret.value.bottom);
+
+			});
+
+			/*
+			api.addEventListener({
+			    name: 'keyback'
+			}, function(ret, err) {
+			    backFn();
+			});
+			*/
+
+	};
+
+	var openWin_inner = function(){
+	  if(api.pageParam.iurl2==undefined){
+	    alertFn2("参数错误");
+	    return false;
+	  }
+	  openWinFn(api.pageParam.iurl2);
+	}
+
+	var openWin_inner2 = function(){
+	  if(api.pageParam.iurl3==undefined){
+	    alertFn2("参数错误");
+	    return false;
+	  }
+	  openWinFn(api.pageParam.iurl3);
+	}
+
+	var openWin_inner_select = function(){
+
+		if(api.pageParam.pagecs.param.type==undefined){
+	    alertFn2("参数错误");
+	    return false;
+	  }
+		openWinFn(addUserLinkInfoObj2,api.pageParam.pagecs.param.type);
+	}
+
+
+	//点击确认按钮
+	var addUserFn = function(){
+
+		if(api.pageParam.addEvent==1){//确认添加人员
+
+			api.sendEvent({
+					name: 'mainConfingAddUser',
+					extra: {}
+			});
+
+		}else if(api.pageParam.addEvent==2){//汇总总列表(组)
+
+			api.sendEvent({
+					name: 'confirmSearchUserEvent_cuf',
+					extra: {}
+			});
+
+		}else if(api.pageParam.addEvent==3){//修改用户列表(组)
+
+			api.sendEvent({
+					name: 'confirmUpdateUserEventGroup_cuf',
+					extra: {}
+			});
+
+		}else if(api.pageParam.addEvent==4){//修改用户搜索列表(组)
+
+			api.sendEvent({
+					name: 'confirmSearchUserEventGroup_cuf',
+					extra: {}
+			});
+
+		}else{
+			alertFn2("参数错误");
+			return false;
+		}
+		backFn();
+	}
+
+	var searchFn = function(){
+
+		var searchword = $api.val($api.dom("input.keyboard"));
+		searchword = searchword.replace(/(^\s*)|(\s*$)/g, "");
+
+		if(searchword==''){
+			alertFn2("请输入搜索内容");
+			return false;
+		}
+
+		api.sendEvent({
+				name: 'searchkeyWord',
+				extra: {
+					kw:searchword
+				}
+		});
+
+}
+
+	var searchEvenFn = function(){//搜索连接
+
+		if(api.pageParam.searchEvent==1){
+
+			api.sendEvent({
+					name: 'searchEvent',
+					extra: {
+					}
+			});
+
+		}else if(api.pageParam.searchEvent==2){
+
+			api.sendEvent({
+					name: 'searchEvent_group',
+					extra: {
+					}
+			});
+
+		}else{
+			alertFn2("参数错误");
+		}
+	}
+
+	var operatorFn = function(op){
+
+		api.sendEvent({
+				name: 'operatorFnEvent',
+				extra: {
+					opid:op
+				}
+		});
+
+	}
+
+
+</script>
+</html>

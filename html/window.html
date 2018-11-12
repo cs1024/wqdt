@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>一线服务</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/svg.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <h1>一线服务</h1>
+        </div>
+        <div id="main">
+
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+
+		//判断是否登陆
+
+		var sendCode = $api.getStorage('sendCode');
+    
+		var statusBarAppearance = api.statusBarAppearance;
+    	if(statusBarAppearance){
+
+    		$api.css($api.dom("#header h1"),"padding-top:25px;");
+
+    	}
+
+    	var winHeight = api.winHeight;
+
+		frame_h = winHeight - $api.dom("#header h1").offsetHeight;
+
+		api.openFrame({
+		    name: 'login',
+		    url: 'login.html',
+		    rect: {
+		        x: 0,
+		        y: $api.dom("#header").offsetHeight,
+		        w: 'auto',
+		        h: frame_h
+		    },
+		    pageParam: {
+		        name: 'test'
+		    },
+			animation:{
+			  type:"none"
+			}
+		});
+
+		api.addEventListener({
+		    name: 'keyback'
+		}, function(ret, err) {
+
+			    	api.closeWidget({
+					    id: 'A6057717985709',
+					    retData: {
+					        name: 'closeWidget'
+					    },
+					    animation: {
+					        type: 'flip',
+					        subType: 'from_bottom',
+					        duration: 500
+					    }
+					});
+
+
+		});
+
+	};
+</script>
+</html>

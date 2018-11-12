@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/svg.css"/>
+    <style>
+    	body{
+    	}
+    	.header img{width:100%;height:auto;vertical-align:top;}
+    	.footer img{width:100%;height:auto;vertical-align:top;}
+    	.bodyer{padding:15px 30px;
+    		background: -webkit-linear-gradient(left, #b3fffd,#ffffff 25%,#ffffff 75%,#b3fffd);
+    		background-repeat:repeat-y;
+    		background-size:100% auto;
+    	}
+    	.bodyer .import{line-height:45px;color:#fe7e00;}
+    	.bodyer .top .header{text-align:center;line-height:45px;}
+    	.bodyer .top .content{color:#b4b2b3;}
+
+    	.header .dtime{position:absolute;top:3em;right:3em;font-size:12px;text-align:right;}
+    	/*.dtime{color:#fdc003;font-size:1.1em;font-weight:600;text-align:center;background:url('../../image/rqbg.jpg');background-repeat:no-repeat;background-size:100% 100%;line-height:2em;}*/
+    </style>
+</head>
+<body style="background-color:#fff!important;">
+<style>
+	.title{
+		COLOR: rgb(254,126,0);
+		background-image:url('data:image/svg+xml;charset=utf-8,<svg t="1508660334114" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1249" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><path d="M201.655749 368.64c53.169231 0 106.141538-0.196923 159.310769 0.196923 8.467692 0 12.012308-2.56 14.572308-10.633846 32.492308-100.627692 65.181538-201.058462 98.067692-301.489231 8.073846-24.418462 31.507692-35.052308 54.153846-25.206154 12.996923 5.710769 19.101538 16.344615 23.236923 29.341539 32.098462 98.855385 64.393846 197.710769 96.295385 296.566154 2.953846 9.058462 6.892308 11.421538 16.147692 11.421538 102.990769-0.590769 206.178462-0.590769 309.169231-0.787692 6.892308 0 13.981538 0 20.873846 1.378461 15.163077 3.150769 24.221538 12.996923 28.356923 27.766154 3.938462 14.375385 0.590769 27.372308-10.436923 37.218462-8.467692 7.68-18.116923 14.178462-27.569231 20.873846-79.163077 56.910769-158.326154 113.624615-237.686153 170.141538-6.498462 4.726154-7.68 8.664615-5.316923 16.147693 32.886154 99.643077 65.575385 199.483077 98.264615 299.323077 7.089231 21.464615 3.150769 36.430769-12.209231 47.655384-15.556923 11.224615-32.689231 10.633846-50.412308-2.166154-85.464615-61.833846-171.126154-123.470769-256.393846-185.698461-7.089231-5.12-11.224615-4.726154-17.92 0.196923-85.661538 62.227692-171.716923 123.864615-257.181538 186.289231-28.553846 20.873846-58.88 2.363077-63.409231-20.283077-1.575385-8.467692-0.590769-18.313846 1.969231-26.387693 32.295385-98.855385 64.787692-197.513846 97.870769-295.975384 3.544615-10.24 1.378462-14.966154-7.089231-20.873846C189.446518 562.806154 104.375749 501.76 19.108057 440.713846c-17.132308-12.209231-22.646154-27.569231-16.935385-45.292308 5.710769-17.329231 19.889231-27.372308 40.172308-27.372307 53.169231-0.196923 106.141538 0 159.310769 0v0.590769z" fill="#fe7e00" p-id="1250"></path></svg>');
+		background-repeat:no-repeat;
+		font-size:20px;
+		line-height:20px;
+		background-position:center left;
+		text-indent:25px;
+		font-weight:bold;
+		margin-top:25px;
+		margin-bottom:15px;
+	}
+
+	.subTitle{
+		text-align:center;
+		font-size:18px;
+		margin-bottom:15px;
+	}
+	.mode1 .content{
+		color:red;
+	}
+
+	._fontSize{
+		font-size:16px;
+	}
+
+	ul.list li{
+	line-height:18px;
+	padding:8px 0;
+	}
+	ul.list li a{
+		text-decoration:underline;
+		color:#000;
+	}
+	.mode1 .title,.mode2 .title,.mode3 .title,.mode4 .title{
+		margin-bottom:10px;
+	}
+
+	.modex,.mode2,.mode3,.mode4{
+		display:none;
+	}
+</style>
+<div class="header">
+	<img src="../image/header.jpg"/>
+	<div class="dtime">
+		<div class="t1"></div>
+		<div class="t2"></div>
+	</div>
+</div>
+<div class="bodyer">
+	<div class="mode1">
+		<div class="title"></div>
+		<div class="subTitle"></div>
+		<div class="content _fontSize"></div>
+	</div>
+	<div style="height:15px;"></div>
+	<div class="modex">
+		<div class="title"></div>
+		<ul class="list _fontSize">
+		</ul>
+	</div>
+	<div class="mode2">
+		<div class="title"></div>
+		<ul class="list _fontSize">
+			<li></li>
+		</ul>
+	</div>
+	<div class="mode3">
+		<div class="title"></div>
+		<ul class="list _fontSize">
+		</ul>
+	</div>
+	<div style="height:15px;"></div>
+	<div class="mode4">
+		<div class="title"></div>
+		<ul class="list _fontSize">
+		</ul>
+	</div>
+</div>
+<div class="footer">
+	<img src="../image/footer.jpg"/>
+</div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+
+	var systemType = '';
+
+	apiready = function(){
+
+		systemType = api.systemType;
+
+		api.setRefreshHeaderInfo({
+		    loadingImg: 'widget://image/refresh.png',
+		    bgColor: '#fff',
+		    textColor: '#963B3D',
+		    textDown: '下拉刷新...',
+		    textUp: '松开刷新...'
+		}, function(ret, err) {
+		    //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+
+		    showInfo();
+
+		});
+
+		api.addEventListener({
+	        name:'onLineEvent'
+	    },function(ret,err){
+	    	showInfo();
+	    });
+
+		api.showProgress({
+		    title: '努力加载中...',
+		    text: '一线服务...',
+		    modal:false
+		});
+
+		showInfo();
+
+		api.addEventListener({
+		    name: 'nav_info_event_cb'
+		}, function(ret, err) {
+
+			showInfo();
+
+		})
+
+
+	};
+
+	function showInfo(){
+
+		api.ajax({
+			url: 'http://yxfw02.demo.fjlmcm.cn/m/server/index.php?control=Inform&do=cb',
+			method: 'get',
+			headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+			},
+			data: {
+			}
+		}, function(ret, err) {
+
+			api.hideProgress();
+			api.refreshHeaderLoadDone();
+
+		    if(ret!=''&&ret!=undefined){
+
+		    	if(ret.result!=undefined&& ret.result=='s009'){
+					api.sendEvent({
+						name:'loginOutNotice',
+						extra: {
+					        notice: ret
+					    }
+					})
+					return false;
+				}
+
+
+		    	$(".footer").css("display","block");
+		    	$(".mode1 .title").html(ret.dbldBT);
+
+		    	var ldName = '';
+
+		    	for(var n=0;n<ret.dbldName.length;n++){
+		    		ldName += '<p>'+ret.dbldName[n]+'</p>';
+		    	}
+
+		    	$(".mode1 .subTitle").html(ldName);
+
+		    	$(".mode1 .content").html(ret.dbldjj);
+
+		    	$(".modex .list").empty();
+		    	$(".mode2 .list").empty();
+		    	$(".mode3 .list").empty();
+		    	$(".mode4 .list").empty();
+
+		    	$(".dtime").html(ret.time1+'<br>'+ret.time2+'<br>'+ret.tq);
+
+		    	if(ret.zyhdnr!=undefined){
+
+		    		$(".modex").css("display","block");
+
+
+		    		$(".modex .title").html(ret.zyhdBT);
+
+		    		for(var i=0;i<ret.zyhdnr.length;i++){
+
+		    			$(".modex .list").append("<li>"+ret.zyhdnr[i]+"</li>");
+		    		}
+
+		    	}
+
+		    	if(ret.gztsnr!=undefined){
+
+		    		$(".mode2").css("display","block");
+		    		$(".mode2 .title").html(ret.gzzsBT);
+
+		    		for(var i=0;i<ret.gztsnr.length;i++){
+
+		    			$(".mode2 .list").append("<li>"+ret.gztsnr[i]+"</li>");
+		    		}
+
+		    	}
+
+		    	if(ret.mrywnr!=undefined){
+
+		    		$(".mode3").css("display","block");
+		    		$(".mode3 .title").html(ret.mrywTT);
+
+		    		for(var i=0;i<ret.mrywnr.length;i++){
+
+		    			$(".mode3 .list").append("<li><a _href='"+ret.mrywnr[i][1]+"' _title='"+ret.mrywnr[i][0]+"' onclick='openWz(this);'>"+ret.mrywnr[i][0]+"</a></li>");
+		    		}
+
+		    	}
+
+		    	if(ret.tszsnr!=undefined){
+
+		    		$(".mode4").css("display","block");
+		    		$(".mode4 .title").html(ret.tszsBT);
+
+		    		for(var i=0;i<ret.tszsnr.length;i++){
+
+		    			$(".mode4 .list").append("<li><a _href='"+ret.tszsnr[i][1]+"' _title='"+ret.tszsnr[i][0]+"' onclick='openWz(this);'>"+ret.tszsnr[i][0]+"</a></li>");
+		    		}
+
+		    	}
+
+		   }
+		});
+
+	}
+
+
+/*
+	var openWz = function(obj){
+
+        if(systemType=='android'){
+
+        	api.openWin({
+			    name: 'infoWinInner',
+			    url: './xinxiinner/window.html',
+			    pageParam: {
+			        title:$(obj).attr("_title"),
+			        iurl:'cb_link.html',
+			        frameName:'cbinner',
+			        link:$(obj).attr("_href")
+			    },
+			    animation:{
+				    type:"push",                //动画类型（详见动画类型常量）
+				    subType:"from_right",       //动画子类型（详见动画子类型常量）
+				    duration:300                //动画过渡时间，默认300毫秒
+				}
+			});
+
+        }else{
+
+        	api.openWin({
+			    name: 'infoWinInner',
+			    url: './xinxiinner/window.html',
+			    pageParam: {
+			        title:$(obj).attr("_title"),
+			        iurl:'cb_link.html',
+			        frameName:'cbinner',
+			        link:$(obj).attr("_href")
+			    }
+			});
+
+        }
+
+	}
+
+
+	openDuBan = function(){
+
+		api.openWin({
+		    name: 'infoWinInner',
+		    url: './xinxiinner/window.html',
+		    pageParam: {
+		        title:'督办进度通知',
+		        iurl:'duban.html',
+		        frameName:'xinxidubaninner'
+		    },
+		    animation:{
+			    type:"push",                //动画类型（详见动画类型常量）
+			    subType:"from_right",       //动画子类型（详见动画子类型常量）
+			    duration:300                //动画过渡时间，默认300毫秒
+			}
+		});
+
+
+	}
+
+	var openReDian = function(){
+
+		api.openWin({
+		    name: 'infoWinInner',
+		    url: './xinxiinner/window.html',
+		    pageParam: {
+		        title:'信息动态',
+		        iurl:'redian.html',
+		        frameName:'xinxiredianinner'
+		    },
+		    animation:{
+			    type:"push",                //动画类型（详见动画类型常量）
+			    subType:"from_right",       //动画子类型（详见动画子类型常量）
+			    duration:300                //动画过渡时间，默认300毫秒
+			}
+		});
+
+	}
+
+	var openReDian1 = function(){
+
+		api.openWin({
+		    name: 'infoWinInner',
+		    url: './xinxiinner/window.html',
+		    pageParam: {
+		        title:'信息动态',
+		        iurl:'redian1.html',
+		        frameName:'xinxiredianinner'
+		    },
+		    animation:{
+			    type:"push",                //动画类型（详见动画类型常量）
+			    subType:"from_right",       //动画子类型（详见动画子类型常量）
+			    duration:300                //动画过渡时间，默认300毫秒
+			}
+		});
+
+	}
+
+	var openReDian2 = function(){
+
+		api.openWin({
+		    name: 'infoWinInner',
+		    url: './xinxiinner/window.html',
+		    pageParam: {
+		        title:'信息动态',
+		        iurl:'redian2.html',
+		        frameName:'xinxiredianinner'
+		    },
+		    animation:{
+			    type:"push",                //动画类型（详见动画类型常量）
+			    subType:"from_right",       //动画子类型（详见动画子类型常量）
+			    duration:300                //动画过渡时间，默认300毫秒
+			}
+		});
+
+	}
+
+  */
+
+
+
+</script>
+</html>

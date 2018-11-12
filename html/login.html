@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<meta name="flexible" content="initial-dpr=2"/>
+    <title>一线服务</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/svg.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<script type="text/javascript" src="../script/main.js"></script>
+    <style>
+
+			#_box{
+				padding-top:3rem;
+			}
+
+			.flexBoxSyle{
+				border-bottom:1px solid #f3f3f3;
+				width:90%;
+				margin:0 auto;
+				-webkit-align-items:center;
+				box-align:center;
+				-moz-box-align:center;
+				-webkit-box-align:center;
+				align-items:center;/*垂直居中*/
+			}
+			.flexBoxSyle.first{border-top:1px solid #f3f3f3;}
+			/*.flexBoxSyle .sbox{line-height: 35px;}*/
+			.flexBoxSyle input[type=text]{height:45px;outline:none;}
+    	/*.flexBoxSyle input[type=text]:focus{border-bottom:1px solid #e3a78e;}*/
+    	button.login{width:90%;height:40px;text-align:center;line-height:40px;color:#fff;outline:none;margin-top:15px;margin:0 auto;display: block;margin-top:2rem}
+    	.flexBoxSyle .codeRow{position:relative;}
+    	.flexBoxSyle button.getCode{position:absolute;top:7px;right:0;color:white;font-size:13px;padding:3px;height:25px;outline:none;font-size:0.4rem;border-radius: 3px;}
+			.header_img{position: absolute;top:6.5rem;left:6.25rem;}
+			.header_img img{width:3.5rem;height:3.5rem;border-radius: 6px;}
+    </style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+				 <h1>登录</h1>
+		 </div>
+		<img src="../image/login_header.jpg" class="banner_header"/>
+
+		<div class="header_img">
+					<img src="../image/yxfw_logo.jpg"/>
+		</div>
+		<div id="_box">
+			<div class="flexBoxSyle first">
+				<div class="sbox">手机号</div>
+				<div class="sbox2"><input style="width:100%" type="text" value="" name="utel" placeholder="请输入手机号码"></div>
+			</div>
+			<div class="flexBoxSyle">
+				<div class="sbox">验证码</div>
+				<div class="sbox2 codeRow"><input style="width:100%" type="text" name="code" placeholder="请输入验证码"><button onclick="getCode(60);" class="getCode app_main_color">发送验证码</button></div>
+			</div>
+			<button type="button" onclick="loginFn();" class="login app_main_color">登录</button>
+		</div>
+
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script>
+
+	apiready = function(){
+		//状态栏
+    	var statusBarAppearance = api.statusBarAppearance;
+    	if(statusBarAppearance){
+				$api.css($api.dom("#header"),"padding-top:0.8rem;");
+				$api.css($api.dom(".header_img"),"top:7.3rem;");
+    	}
+			api.addEventListener({
+			    name: 'keyback'
+			}, function(ret, err) {
+			    api.toLauncher();
+			});
+	}
+
+
+	var loginFn = function(){
+
+		if($api.val($api.dom('input[name=utel]'))==''){
+			alertFn2("请输入手机号码");
+		}else if($api.val($api.dom('input[name=code]'))==''){
+			alertFn2("请输入验证码");
+		}else{
+
+			api.showProgress({
+			    title: '登录中',
+			    modal: false
+			});
+
+			api.ajax({
+					url: 'http://yxfw02.demo.fjlmcm.cn/m/server/login_x.php',
+					method: 'post',
+					headers:{
+						'app-rongzheng-key':'A6088670311863',
+						'app-rongzheng-value':'A9369BCD-0A52-B8EF-2719-0CBCB106C070'
+					},
+					data: {
+							values: {
+									uname:$api.val($api.dom('input[name=uname]')),
+									utel:$api.val($api.dom('input[name=utel]')),
+									code:$api.val($api.dom('input[name=code]')),
+									deviceId:api.deviceId,
+									device:api.deviceName
+							}
+					}
+			}, function(ret, err) {
+				api.hideProgress();
+
+				console.log(JSON.stringify(ret));
+
+				if(ret.errorno>0){
+
+					alertFn2(ret.errorMsg);
+
+				}else{
+
+					$api.setStorage("userid",ret.errorMsg.userid);
+			    $api.setStorage("userpic",ret.errorMsg.touxiang);
+			    $api.setStorage("phone",ret.errorMsg.phone);
+			    $api.setStorage("signature",ret.errorMsg.signature);
+			    $api.setStorage("username",ret.errorMsg.username);
+			    $api.setStorage("sendCode",ret.errorMsg.sendCode);
+			    $api.setStorage("zhiwei",ret.errorMsg.zhiwei);
+					$api.setStorage("danwei",ret.errorMsg.dangwei);
+			    $api.setStorage("rnd",ret.errorMsg.rnd);
+			    $api.setStorage("hasbang",0);
+
+					api.openWin({
+					    name: 'index',
+					    url: '../index.html',
+					    reload:true,
+					    slidBackEnabled:false,
+					    pageParam: {
+					    },
+					    animation:{
+					    	type:"none"
+					    }
+					});
+
+				}
+
+			});
+
+		}
+
+	}
+
+	//获取验证码
+	var getCode = function(_time){
+
+		if($api.val($api.dom('input[name=utel]'))==''){
+			alertFn("请输入手机号码");
+		}else if(!/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(11[0-9]{1})|(12[0-9]{1})|(14[0-9]{1})|(16[0-9]{1})|(17[0-9]{1})|(19[0-9]{1})|(10[0-9]{1}))+\d{8})$/.test($api.val($api.dom('input[name=utel]')))){
+			alertFn("请输入正确的手机号码");
+		}else{
+
+				$api.html($api.dom('.getCode'),"请稍后");
+
+			api.ajax({
+					url: 'http://yxfw02.demo.fjlmcm.cn/m/server/sms/index_x.php',
+					method: 'post',
+					timeout:30,
+					headers:{
+						'app-rongzheng-key':'A6088670311863',
+						'app-rongzheng-value':'A9369BCD-0A52-B8EF-2719-0CBCB106C070'
+					},
+					data: {
+							values: {
+									tel: $api.val($api.dom('input[name=utel]')),
+									deviceId:api.deviceId
+							}
+					}
+			}, function(ret, err) {
+
+				if(ret.errorno<=0){
+					$api.attr($api.dom(".getCode"),'disabled',true);
+					djsFn(_time);
+				}else{
+					$api.removeAttr($api.dom(".getCode"),'disabled');
+					$api.html($api.dom(".getCode"),"发送验证码");
+				}
+
+				alertFn2(ret.errorMsg);
+				console.log(JSON.stringify(ret));
+
+			});
+
+		}
+	}
+
+	var djsFn = function(_time){
+
+		$api.html($api.dom(".getCode"),_time+'秒');
+		timer = setTimeout('djsFn('+(_time-1)+')',1000);
+
+		if(_time<=0){
+			$api.removeAttr($api.dom(".getCode"),'disabled');
+			$api.html($api.dom(".getCode"),"发送验证码");
+			clearTimeout(timer);
+		}
+	}
+
+
+</script>
+
+</html>

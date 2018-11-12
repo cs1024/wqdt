@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/svg.css"/>
+		<script type="text/javascript" src="../../script/main.js"></script>
+    <style>
+
+    html{
+
+		}
+		body{
+			background-color: #f8f8f8;
+		}
+		.flexBoxSyle{margin-bottom:0.35rem;background-color: #fff;padding:0.5rem;}
+		.bldx .flexBoxSyle{padding:0;}
+		.mkdb .bldx{background-color: #fff;padding:0.5rem;margin-bottom:0.35rem;}
+		textarea,input{outline:none;}
+		.mkdb .bldx .header{border-bottom:1px solid #f3f3f3;padding-bottom:0.35rem;}
+		.mkdb .bldx .header ._right{text-align: right;}
+		.mkdb .bldx .header ._right span{display: inline-block;width:0.8rem;height:0.8rem;background-size:98%;background-repeat: no-repeat;}
+		.mkdb .bldx .list{min-height: 2.5rem;}
+
+		.list{margin:0;padding:0;overflow: hidden;}
+		.list li{width:16.66666%;text-align:center;float:left;overflow: hidden;height:3.5rem;}
+		.list li img{width:2rem;height:2rem;vertical-align: top;}
+		.list li .sname{margin-top:0.1rem;font-size:0.4rem;}
+
+    </style>
+</head>
+<body>
+
+    <div class="mkdb">
+    	<div class="qjsy flexBoxSyle">
+    		<div class="sname">督办内容&nbsp;&nbsp;</div>
+    		<textarea rows="5" class="sbox" name="dbnr" placeholder="请输入督办内容"></textarea>
+    	</div>
+
+    	<div class="dday flexBoxSyle">
+				<div class="sname">督办件编号&nbsp;&nbsp;</div>
+    		<input type='text' class="sbox" name="smbh" placeholder='请输入督办件编号(非必填)'>
+    	</div>
+
+    	<div class="bldx">
+    		<div class="header flexBoxSyle">
+    			<div class="_left sbox">办理对象&nbsp;&nbsp;已选:<span class="num">0</span>人</div>
+    			<div class="_right addUserLists sbox"><span class="add" onclick="openWinFn(addUserLinkInfoObj,hasSelectUserIdsArr);">&nbsp;</span></div>
+    		</div>
+    		<ul class="list"></ul>
+    	</div>
+
+    	<div class="dtime">
+    		<div class="fir flexBoxSyle sname">
+					<div>反馈时间&nbsp;&nbsp;</div>
+					<input name="fksjlabel" onclick="timeSelect(this,false);" type="text" readonly="readonly" class="sbox" placeholder="请输入反馈时间">
+					<input name="fksj" type="hidden" value=""/>
+				</div>
+    	</div>
+
+    	<div class="qjsy_bz flexBoxSyle">
+    		<div class="sname">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;</div>
+    		<textarea rows="5" class="sbox" placeholder="请输入备注(非必填)" name="bz"></textarea>
+    	</div>
+
+    	<div tapmode="activebg3" onclick="subFn();" class="sbtn app_main_color">确认发布</div>
+			<br><br>
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script>
+
+apiready = function(){
+
+	api.addEventListener({
+	    name: 'mainConfingAddUser'
+	}, function(ret, err){
+
+		$api.html($api.dom(".list"),'');
+
+		hasSelectUserIdsArr = searchpeddingArr;
+
+		if(hasSelectUserIdsArr.length<=0){
+			return false;
+		}
+
+
+		$api.html($api.dom(".bldx .num"),hasSelectUserIdsArr.length);
+
+		var hasSelectUserIdsStr = hasSelectUserIdsArr.join(",");
+
+		api.ajax({
+				url: webSiteUrl,
+				method: 'post',
+				headers: {
+				},
+				data:{
+					values:{
+						control:'MemberCtro',
+						do:'UserListById',
+						userids:hasSelectUserIdsStr
+					}
+				}
+		}, function(ret, err) {
+
+			for(var i in ret.result){
+
+				$api.append($api.dom(".list"),'<li onclick="menuFnu('+ret.result[i].userid+');" class="listLi'+ret.result[i].userid+'"><img src="'+ret.result[i].touxiang+'"/><div class="sname">'+ret.result[i].username+'</div></li>');
+			}
+
+		});
+
+	});
+
+	api.addEventListener({
+	    name: 'mainpending'
+	}, function(ret, err){
+		searchpeddingArr = ret.value.userids;
+	});
+
+}
+
+var menuFnu = function(id){
+
+	api.actionSheet({
+	    cancelTitle: '取消',
+	    destructiveTitle: '你确认删除吗？',
+	    buttons: ['确定']
+	}, function(ret, err) {
+	    var index = ret.buttonIndex;
+			if(index==2){
+				$api.remove($api.dom(".listLi"+id));
+				for(var i in hasSelectUserIdsArr){
+					if(hasSelectUserIdsArr[i]==id){
+						hasSelectUserIdsArr.splice(i,1);
+						break;
+					}
+				}
+				$api.html($api.dom(".bldx .num"),hasSelectUserIdsArr.length);
+			}
+	});
+
+}
+
+var subFn = function(){
+
+	if($api.val($api.dom("textarea[name=dbnr]"))==''){
+		alertFn2("请输入督办内容");
+	}else if($api.val($api.dom("input[name=fksj]"))==''){
+		alertFn2("请选择反馈时间");
+	}else if(hasSelectUserIdsArr.length<=0){
+		alertFn2("请选择办理对象");
+	}else{
+
+		api.confirm({
+			title: '一线服务',
+			msg: '你确定发布督办信息',
+			buttons: ['确定', '取消']
+		}, function(ret, err) {
+
+			var index = ret.buttonIndex;
+
+			if(index==1){
+
+				var bldx = hasSelectUserIdsArr.join(",");
+
+				api.ajax({
+						url: webSiteUrl,
+						method: 'post',
+						headers: {
+						},
+						data: {
+		            values: {
+									control:'dcjc',
+									do:'AddDuban',
+									dbnr:$api.val($api.dom("textarea[name=dbnr]")),
+									dbbh:$api.val($api.dom("input[name=smbh]")),
+									fksj:$api.val($api.dom("input[name=fksj]")),
+									bldxId:bldx,
+									bz:$api.val($api.dom("textarea[name=bz]")),
+									userid:$api.getStorage("userid")
+								}
+						}
+				}, function(ret, err) {
+
+					api.sendEvent({
+					    name: 'updateListEvent',
+					    extra: {
+					    }
+					});
+
+					if(ret.errorno<=0){
+							alertFn4(ret.errorMsg);
+					}else{
+							alertFn3(ret.errorMsg);
+					}
+
+				});
+
+			}
+
+		});
+
+	}
+}
+
+</script>
+</html>
