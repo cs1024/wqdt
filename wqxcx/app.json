@@ -1,0 +1,16 @@
+{
+  "pages": [
+        "we7_02/pages/result/result",
+        "we7_02/pages/index/index",
+
+
+    "we7_02/pages/rank/rank",
+    "we7_02/pages/answer/answer"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "答题系统",
+    "navigationBarBackgroundColor": "#1ba9ba",
+    "backgroundColor": "#1ba9ba"
+  }
+}

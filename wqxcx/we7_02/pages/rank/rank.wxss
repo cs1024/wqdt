@@ -1,0 +1,105 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background-image: url(http://we7.demo.cs1024.cn/addons/we7_02/images/rank_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+}
+
+.rank {
+  padding: 0 50rpx 50rpx;
+  margin: 0rpx 67rpx;
+  min-height: 88vh;
+  background: #fff;
+  position: relative;
+  top: 60rpx;
+  border-radius: 20rpx;
+  box-shadow: 2rpx 2rpx 20rpx #888;
+}
+
+.user {
+  padding: 30rpx 0;
+  text-align: center;
+  font-size: 0;
+  border-bottom: 1rpx solid #e4e4e4;
+}
+
+.user .avatarUrl {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  vertical-align: top;
+}
+
+.user .paiming {
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #333;
+  margin-left: 20rpx;
+}
+
+.list_li {
+  padding: 25rpx 0;
+  border-bottom: 1rpx solid #e4e4e4;
+  color: #666;
+  line-height: 70rpx;
+}
+
+.list_li .rank_img {
+  width: 55rpx;
+  margin-right: 20rpx;
+  margin-left: 5rpx;
+  display: inline-block;
+  text-align: center;
+}
+
+.list_li .rank_img image {
+  width: 45rpx;
+  height: 70rpx;
+  vertical-align: top;
+}
+
+.list_li .rank_num {
+  width: 55rpx;
+  text-align: center;
+  margin-right: 20rpx;
+  margin-left: 5rpx;
+  display: inline-block;
+  color: #666;
+  font-size: 32rpx;
+}
+
+.list_li .avatarUrl {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  vertical-align: top;
+  margin-right: 20rpx;
+}
+
+.list_li .name {
+  font-size: 24rpx;
+}
+
+.list_li .score {
+  font-size: 28rpx;
+  float: right;
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.no_data {
+  font-size: 28rpx;
+  color: #888;
+  text-align: center;
+  padding: 40rpx;
+}
+
+.no_more {
+  font-size: 24rpx;
+  color: #888;
+  text-align: center;
+  padding: 25rpx;
+}

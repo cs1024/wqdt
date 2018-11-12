@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background-image: url(http://we7.demo.cs1024.cn/addons/we7_02/images/start_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+}
+
+.start {
+  position: relative;
+  background-image: url(http://we7.demo.cs1024.cn/addons/we7_02/images/start_go.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 320rpx;
+  height: 100rpx;
+  margin-top: 75vh;
+}
