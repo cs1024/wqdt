@@ -1,5 +1,0 @@
-<view class="container">
-  <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" class="start"></button>
-</view>
-<import src="/we7/pages/templates/footer.wxml" />
-<template is="footerWx" data="{{...tabBar}}" />
